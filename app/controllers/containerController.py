@@ -14,6 +14,8 @@ class ContainerController(Resource):
         container = json.loads(
             data, object_hook=lambda d: SimpleNamespace(**d))
 
+        self.containerService.runcontainer(container)
+
         return {
             "message": "get: hello from the testcontroller"
         }

@@ -7,7 +7,7 @@ class ContainerService():
 
     def runcontainer(self, container):
         containerInstance = self.containerHelper.does_the_container_exist(
-            container.ContainerDto.container.name)
+            container.name)
 
         if containerInstance != None:
             if containerInstance.stats == 'running':
@@ -18,4 +18,4 @@ class ContainerService():
         self.containerHelper.pull_image(container.image)
 
         self.containerHelper.run_container(container.image, container.environmentVariables,
-                      container.name, container.ports)
+                                           container.name, container.ports)
