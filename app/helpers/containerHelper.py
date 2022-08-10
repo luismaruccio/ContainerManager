@@ -54,6 +54,6 @@ class ContainerHelper():
         portsList = dict()
 
         for port in ports:
-            portsList[f'{port.containerport}/{port.protocol}'] = port.value
+            portsList[f'{port.containerport}/{port.protocol}'] = port.externalport
 
         return portsList
