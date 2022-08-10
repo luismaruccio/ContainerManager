@@ -1,4 +1,4 @@
 class Ports(object):
     containerPort = 0
     protocolPort = ""
-    protocolPort = 0
+    externalPort = 0

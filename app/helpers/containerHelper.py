@@ -62,7 +62,7 @@ class ContainerHelper():
         portsList = dict()
 
         for port in ports:
-            portsList[f'{port.containerPort}/{port.protocolPort}'] = port.protocolPort
+            portsList[f'{port.containerPort}/{port.protocolPort}'] = port.externalPort
 
         print(portsList)
         return portsList
