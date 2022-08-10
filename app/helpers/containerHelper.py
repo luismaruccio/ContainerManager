@@ -39,7 +39,7 @@ class ContainerHelper():
 
     def pull_image(self, image):
         values = image.split(':')
-        self.client.images.pull(repository=values[0], tag=[1])
+        self.client.images.pull(repository=values[0], tag=values[1])
 
     def map_environment(self, environmentVariables):
         environment = []
