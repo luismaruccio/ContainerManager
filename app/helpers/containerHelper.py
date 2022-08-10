@@ -27,19 +27,27 @@ class ContainerHelper():
         container.remove()
 
     def run_container(self, image, environmentVariables, name, ports):
+        print("Entrou Run_Container")
         environmentList = self.map_environment(environmentVariables)
+        print(environmentList)
         portsList = self.map_ports(ports)
+        print(portsList)
 
+        print('Iniciando execução do container')
         if environmentList == []:
-            self.client.containers.run(
-                image=image, detach=False, name=name, ports=portsList, restart_policy={"Name": "always"})
+            result = self.client.containers.run(
+                image=image, detach=True, name=name, ports=portsList, restart_policy={"Name": "always"})
         else:
-            self.client.containers.run(image=image, detach=False, environment=environmentList,
-                                       name=name, ports=portsList, restart_policy={"Name": "always"})
+            result = self.client.containers.run(
+                image=image, detach=True, environment=environmentList, name=name, ports=portsList, restart_policy={"Name": "always"})
+
+        print(result)
 
     def pull_image(self, image):
         values = image.split(':')
+        print(values)
         self.client.images.pull(repository=values[0], tag=values[1])
+        print("Acabou pull_images")
 
     def map_environment(self, environmentVariables):
         environment = []
@@ -56,4 +64,5 @@ class ContainerHelper():
         for port in ports:
             portsList[f'{port.containerPort}/{port.protocolPort}'] = port.protocolPort
 
+        print(portsList)
         return portsList

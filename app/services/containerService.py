@@ -23,16 +23,22 @@ class ContainerService():
         return container
 
     def runcontainer(self, container):
+        print("Iniciando")
         containerInstance = self.containerHelper.does_the_container_exist(
             container.containerName)
 
+        print(containerInstance)
+
         if containerInstance != None:
+            print(containerInstance.stats)
             if containerInstance.stats == 'running':
                 self.containerHelper.stop_container(containerInstance)
 
             self.containerHelper.remove_container(containerInstance)
 
+        print("Iniciando Pull Image")
         self.containerHelper.pull_image(container.image)
 
+        print("Iniciando Run Container")
         self.containerHelper.run_container(container.image, container.environmentVariables,
                                            container.containerName, container.ports)
