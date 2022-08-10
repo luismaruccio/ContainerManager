@@ -38,7 +38,8 @@ class ContainerHelper():
                                        name=name, ports=portsList, restart_policy={"Name": "always"})
 
     def pull_image(self, image):
-        self.client.containers.get(image)
+        values = image.split(':')
+        self.client.images.pull(repository=values[0], tag=[1])
 
     def map_environment(self, environmentVariables):
         environment = []
