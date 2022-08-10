@@ -29,8 +29,13 @@ class ContainerHelper():
     def run_container(self, image, environmentVariables, name, ports):
         environmentList = self.map_environment(environmentVariables)
         portsList = self.map_ports(ports)
-        self.client.containers.run(image=image, detach=False, environment=environmentList,
-                                   name=name, ports=portsList, restart_policy={"Name": "always"})
+
+        if environmentList == []:
+            self.client.containers.run(
+                image=image, detach=False, name=name, ports=portsList, restart_policy={"Name": "always"})
+        else:
+            self.client.containers.run(image=image, detach=False, environment=environmentList,
+                                       name=name, ports=portsList, restart_policy={"Name": "always"})
 
     def pull_image(self, image):
         self.client.containers.get(image)
