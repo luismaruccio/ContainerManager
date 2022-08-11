@@ -23,6 +23,7 @@ class ContainerService():
         return container
 
     def runcontainer(self, container):
+        RUNNING = "running"
         print("Iniciando")
         containerInstance = self.containerHelper.does_the_container_exist(
             container.containerName)
@@ -31,7 +32,8 @@ class ContainerService():
 
         if containerInstance != None:
             print(containerInstance.stats)
-            if containerInstance.stats == 'running':
+            container_state = container.attrs["State"]
+            if container_state["Status"] == RUNNING:
                 self.containerHelper.stop_container(containerInstance)
 
             self.containerHelper.remove_container(containerInstance)

@@ -14,5 +14,5 @@ class ContainerController(Resource):
         self.containerService.runcontainer(container)
 
         return {
-            "message": "get: hello from the testcontroller"
+            "message": "Success"
         }
