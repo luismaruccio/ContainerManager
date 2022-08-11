@@ -31,9 +31,8 @@ class ContainerService():
         print(containerInstance)
 
         if containerInstance != None:
-            print(containerInstance.stats)
-            container_state = container.attrs["State"]
-            if container_state["Status"] == RUNNING:
+            print(containerInstance.status)
+            if containerInstance.status == RUNNING:
                 self.containerHelper.stop_container(containerInstance)
 
             self.containerHelper.remove_container(containerInstance)
